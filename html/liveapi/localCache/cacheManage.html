@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../css/font.css" type="text/css" />
+    <link rel="stylesheet" href="../css/app.css" type="text/css" />
+    <link rel="stylesheet" href="../vendor/modules/angularjs-toaster/toaster.css" type="text/css" />
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Angular -->
+    <script src="../vendor/angular/angular.js"></script>
+
+    <script src="../vendor/angular/angular-animate/angular-animate.js"></script>
+    <script src="../vendor/angular/angular-cookies/angular-cookies.js"></script>
+    <script src="../vendor/angular/angular-resource/angular-resource.js"></script>
+    <script src="../vendor/angular/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../vendor/angular/angular-touch/angular-touch.js"></script>
+    <!-- Vendor -->
+    <script src="../vendor/angular/angular-ui-router/angular-ui-router.js"></script>
+    <script src="../vendor/angular/ngstorage/ngStorage.js"></script>
+    <script src="../vendor/modules/angularjs-toaster/toaster.js"></script>
+
+
+    <!-- bootstrap -->
+    <script src="../vendor/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- lazyload -->
+    <script src="../vendor/angular/oclazyload/ocLazyLoad.js"></script>
+    <!-- translate -->
+    <script src="../vendor/angular/angular-translate/angular-translate.js"></script>
+    <script src="../vendor/angular/angular-translate/loader-static-files.js"></script>
+    <script src="../vendor/angular/angular-translate/storage-cookie.js"></script>
+    <script src="../vendor/angular/angular-translate/storage-local.js"></script>
+
+    <!-- App -->
+    <script src="../js/app.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/config.lazyload.js"></script>
+    <script src="../js/config.router.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/services/ui-load.js"></script>
+    <script src="../js/filters/fromNow.js"></script>
+    <script src="../js/directives/setnganimate.js"></script>
+    <script src="../js/directives/ui-butterbar.js"></script>
+    <script src="../js/directives/ui-focus.js"></script>
+    <script src="../js/directives/ui-fullscreen.js"></script>
+    <script src="../js/directives/ui-jq.js"></script>
+    <script src="../js/directives/ui-module.js"></script>
+    <script src="../js/directives/ui-nav.js"></script>
+    <script src="../js/directives/ui-scroll.js"></script>
+    <script src="../js/directives/ui-shift.js"></script>
+    <script src="../js/directives/ui-toggleclass.js"></script>
+    <script src="../js/directives/ui-validate.js"></script>
+    <script src="../js/controllers/bootstrap.js"></script>
+    <script src="../js/JM.Utils.js"></script>
+
+
+
+
+    <script src="./localcache_manage.js"></script>
+    <script src="./bootstrap.js"></script>
+</head>
+
+<body ng-controller="AppCtrl">
+<div class="panel panel-default">
+    <div class="panel-heading font-bold">机器列表</div>
+    <div class="panel-body">
+        <p class="title">
+            <label><input id='listAll' style='width:15px;' type='checkbox' value="">全选</label>
+        </p>
+        <p class="title" id="serviceList">
+        </p>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading font-bold">缓存查询&clean</div>
+    <div class="panel-body">
+        <p class="title">
+            <input type="text" class="form-control" id="cacheName" placeholder="cacheName">
+            <input type="text" class="form-control" id="cacheKey" placeholder="key">
+            <button class="btn btn-success" id="getCacheBt">查询</button>
+            <button class="btn btn-success" id="cleanCacheBt">清除缓存</button><span id="btip2"></span>
+        </p>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading font-bold">统计</div>
+    <div class="panel-body">
+        <p class="title" style="margin-top: 30px;">
+            <input type="text" class="form-control" id="cacheNamest" placeholder="cacheName">
+            <button class="btn btn-success" id="statistics">统计信息</button>
+        </p>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading font-bold">结果</div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="cacheTable">
+                <thead>
+                <tr class="heading">
+                    <th width="20%">
+                        <h2>ip</h2>
+                    </th>
+                    <th width="30%">
+                        <h2>key</h2>
+                    </th>
+                    <th width="30%">
+                        <h2>value</h2>
+                    </th>
+                    <th width="15%">
+                        <h2>status</h2>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="cacheBody">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">完整数据</h4>
+            </div>
+            <div class="modal-body" id="cacheValue">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        $("#getCacheBt").on("click",getCache);
+    });
+
+    $(function(){
+        $("#cleanCacheBt").on("click",cleanCache);
+    });
+    $(function(){
+        $("#listAll").on("click",checkAll);
+    });
+    $(function(){
+        $("#listAll1").on("click",checkAllList);
+    });
+    $(function(){
+        $("#statistics").on("click",statistics);
+    });
+</script>
+</body>
+</html>
