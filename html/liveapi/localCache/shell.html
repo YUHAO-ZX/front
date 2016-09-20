@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../css/font.css" type="text/css" />
+    <link rel="stylesheet" href="../css/app.css" type="text/css" />
+    <link rel="stylesheet" href="../vendor/modules/angularjs-toaster/toaster.css" type="text/css" />
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Angular -->
+    <script src="../vendor/angular/angular.js"></script>
+
+    <script src="../vendor/angular/angular-animate/angular-animate.js"></script>
+    <script src="../vendor/angular/angular-cookies/angular-cookies.js"></script>
+    <script src="../vendor/angular/angular-resource/angular-resource.js"></script>
+    <script src="../vendor/angular/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../vendor/angular/angular-touch/angular-touch.js"></script>
+    <!-- Vendor -->
+    <script src="../vendor/angular/angular-ui-router/angular-ui-router.js"></script>
+    <script src="../vendor/angular/ngstorage/ngStorage.js"></script>
+    <script src="../vendor/modules/angularjs-toaster/toaster.js"></script>
+
+
+    <!-- bootstrap -->
+    <script src="../vendor/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- lazyload -->
+    <script src="../vendor/angular/oclazyload/ocLazyLoad.js"></script>
+    <!-- translate -->
+    <script src="../vendor/angular/angular-translate/angular-translate.js"></script>
+    <script src="../vendor/angular/angular-translate/loader-static-files.js"></script>
+    <script src="../vendor/angular/angular-translate/storage-cookie.js"></script>
+    <script src="../vendor/angular/angular-translate/storage-local.js"></script>
+
+    <!-- App -->
+    <script src="../js/app.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/config.lazyload.js"></script>
+    <script src="../js/config.router.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/services/ui-load.js"></script>
+    <script src="../js/filters/fromNow.js"></script>
+    <script src="../js/directives/setnganimate.js"></script>
+    <script src="../js/directives/ui-butterbar.js"></script>
+    <script src="../js/directives/ui-focus.js"></script>
+    <script src="../js/directives/ui-fullscreen.js"></script>
+    <script src="../js/directives/ui-jq.js"></script>
+    <script src="../js/directives/ui-module.js"></script>
+    <script src="../js/directives/ui-nav.js"></script>
+    <script src="../js/directives/ui-scroll.js"></script>
+    <script src="../js/directives/ui-shift.js"></script>
+    <script src="../js/directives/ui-toggleclass.js"></script>
+    <script src="../js/directives/ui-validate.js"></script>
+    <script src="../js/controllers/bootstrap.js"></script>
+    <script src="../js/JM.Utils.js"></script>
+    <script src="../js/md5.js"></script>
+
+
+    <style type="text/css">
+        .darkRed{
+            color: darkred;
+        }
+    </style>
+
+    <script src="./groovy_manage.js"></script>
+    <script src="./bootstrap.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="AppCtrl">
+
+<br>
+<br>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-2"><h4>脚本列表:</h4></div>
+            <!-- 脚本列表-->
+            <div class="col-md-6">
+                <select class="form-control" id="scriptList">
+
+                </select>
+            </div>
+            <!-- 查询-->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" id="searchScript">查&nbsp;&nbsp;&nbsp;询</button>
+            </div>
+
+            <!-- 新增-->
+            <div class="col-md-2">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+        <h4>脚本:</h4>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+        <textarea class="form-control" rows="20" id="codeArea">
+        </textarea>
+    </div>
+    <div class="col-md-3">
+        <div class="alert alert-success alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <strong class="darkRed">1)注释:</strong> 目前支持单行注释  `//`<br>
+            <strong class="darkRed">2)spring容器支持:</strong><br>
+            获取bean代码:`context.getBean("beanName");`
+            <br>
+            <strong class="darkRed">3)import:</strong><br>
+            代码中依赖的类，需要import并写在最前面
+            <br>
+            <strong class="darkRed">4)结果返回</strong><br>
+            目前支持string类型的返回,返回结果将显示在下方 ⬇️ 结果栏中
+            <br>
+            <strong class="darkRed">5)例子</strong>
+            简单例子请参考脚本:`参考示例`
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-1 col-md-offset-6" >
+        <button type="button" class="btn btn-primary " id="scriptExec">执&nbsp;&nbsp;&nbsp;行</button>
+    </div>
+    <div class="col-md-1">
+        <button type="button" class="btn btn-warning " id="scriptModify">修改&nbsp;&&nbsp;保存</button>
+
+    </div>
+    <div class="col-md-1">
+        <button type="button" class="btn btn-success" id="addNew" onclick=modal1()>新&nbsp;&nbsp;&nbsp;增</button>
+
+    </div>
+
+    <div class="col-md-3"></div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+        <h4>结果:</h4>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+        <textarea class="form-control" rows="10" id="resultArea"></textarea>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+<br>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">新增脚本</h4>
+
+            </div>
+            <div class="modal-body" id="scriptName">
+                <input class="form-control" id="disabledInput" type="text" placeholder="输入脚本名称">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="scriptSave">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        $("#searchScript").on("click",searchScript);
+    });
+
+    $(function(){
+        $("#addNew").on("click",addNew);
+    });
+    $(function(){
+        $("#scriptExec").on("click",scriptExec);
+    });
+    $(function(){
+        $("#scriptModify").on("click",scriptModify);
+    });
+
+    $(function(){
+        $("#scriptSave").on("click",scriptSave);
+    });
+</script>
+</body>
+</html>
